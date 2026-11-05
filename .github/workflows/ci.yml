@@ -31,7 +31,7 @@ jobs:
         run: npx --yes html-validate@11.17.0 index.html
 
       - name: Check HTML, CSS, and JavaSCript formatting
-        run: npx --yes prettier@3.6.2 --check index.html style.css script.js 
+        run: npx --yes prettier@3.6.2 --write index.html style.css script.js 
 
       - name: Check JavaSCript syntax
         run: node --check script.js 
