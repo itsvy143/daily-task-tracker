@@ -1,0 +1,38 @@
+name: Daily Task Tracker CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+permissions:
+    contents: read
+
+jobs:
+  validate-website:
+    name: Validate HTML, CSS, and JavaSCript
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 
+        uses: actions/setup-node@v4 
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - name: Validate HTML 
+        run: npx --yes html-validate@11.17.0 index.html
+
+      - name: Check HTML, CSS, and JavaSCript formatting
+        run: npx --yes prettier@3.6.2 --check index.html style.css script.js 
+
+      - name: Check JavaSCript syntax
+        run: node --check script.js 
+  
